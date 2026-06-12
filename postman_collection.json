@@ -1,0 +1,227 @@
+{
+  "info": {
+    "_postman_id": "834c89bd-a0c5-412e-9d2a-a9257bb32011",
+    "name": "Enterprise EMS API Collection",
+    "description": "Production API endpoints for the Enterprise Employee Management System.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/v1/health-check/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "v1",
+            "health-check",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "User Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"admin@company.com\",\n  \"password\": \"password123\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Token Refresh",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"refreshToken\": \"{{REFRESH_TOKEN}}\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/auth/refresh",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Employees",
+      "item": [
+        {
+          "name": "List Employees",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/employees?search=&limit=10&offset=0&sortBy=full_name&sortOrder=ASC",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "employees"
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": ""
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "sortBy",
+                  "value": "full_name"
+                },
+                {
+                  "key": "sortOrder",
+                  "value": "ASC"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Leaves",
+      "item": [
+        {
+          "name": "My Leave Balances",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost:5000/api/v1/leaves/balances/me",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "leaves",
+                "balances",
+                "me"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Apply for Leave",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}",
+                "type": "text"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"leaveTypeId\": 1,\n  \"startDate\": \"2026-06-15\",\n  \"endDate\": \"2026-06-18\",\n  \"reason\": \"Family vacation\"\n}"
+            },
+            "url": {
+              "raw": "http://localhost:5000/api/v1/leaves/applications/apply",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "5000",
+              "path": [
+                "api",
+                "v1",
+                "leaves",
+                "applications",
+                "apply"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
