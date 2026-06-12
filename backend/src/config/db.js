@@ -18,6 +18,16 @@ const poolConfig = {
 // If DATABASE_URL is provided directly (e.g., in Neon/Render), use it
 if (process.env.DATABASE_URL) {
   poolConfig.connectionString = process.env.DATABASE_URL;
+  
+  // Enable SSL for managed remote databases (e.g., Render, Neon)
+  const isRemote = process.env.DATABASE_URL.includes('render.com') || 
+                   process.env.DATABASE_URL.includes('neon.tech') || 
+                   process.env.NODE_ENV === 'production';
+  if (isRemote) {
+    poolConfig.ssl = {
+      rejectUnauthorized: false
+    };
+  }
 }
 
 const pool = new Pool(poolConfig);
